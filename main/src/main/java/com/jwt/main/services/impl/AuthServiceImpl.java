@@ -1,4 +1,4 @@
-package com.jwt.main.services.impl;
+package com.jwt.main.service.impl;
 
 public class AuthServiceImpl {
     
