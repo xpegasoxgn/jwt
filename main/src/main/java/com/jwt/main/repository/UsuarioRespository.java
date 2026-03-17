@@ -1,5 +1,9 @@
 package com.jwt.main.repository;
 
-public class UsuarioRespository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.jwt.main.entity.Usuario;
+
+public interface  UsuarioRespository extends JpaRepository<Usuario, Long> {
     
 }
