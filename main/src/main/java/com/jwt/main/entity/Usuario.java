@@ -1,136 +1,119 @@
 package com.jwt.main.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="username", nullable = false, unique = true, length=50)
-    private String username;
-    @Column(name="password", nullable = false, length=100)
-    private String password;
-    @Column(name="email", nullable = false, unique = true, length=100)
-    private String email;
-    @Column(name="nombre", nullable = false, length=100)    
-    private String nombre;
-    @Column(name="apellido", nullable = false, length=100)
+
+    @Column(nullable = false)
+    private Boolean activo;
+
+    @Column(nullable = false, length = 100)
     private String apellido;
-    @Column(name="fecha_creacion", nullable = false)
+
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
+
+    @Column(name = "fecha_creacion", nullable = false)
     private LocalDate fechaCreacion;
-    @Column(name="activo", nullable = false)
-    private boolean activo;
 
-    @OneToMany(mappedBy = "usuario", cascade=CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
-    private Set <UsuarioRol> roles = new HashSet<>();
+    @Column(nullable = false, length = 100)
+    private String nombre;
 
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = LocalDate.now();
-        this.activo = true;
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String username;
+
+    public Usuario() {
+    }
+
+    public Usuario(Long id, Boolean activo, String apellido, String email,
+                   LocalDate fechaCreacion, String nombre, String password, String username) {
+        this.id = id;
+        this.activo = activo;
+        this.apellido = apellido;
+        this.email = email;
+        this.fechaCreacion = fechaCreacion;
+        this.nombre = nombre;
+        this.password = password;
+        this.username = username;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Boolean getActivo() {
+        return activo;
     }
 
     public String getApellido() {
         return apellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public String getEmail() {
+        return email;
     }
 
     public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public Set<UsuarioRol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<UsuarioRol> roles) {
-        this.roles = roles;
-    }
-
-    public Usuario(Long id, String username, String password, String email, String nombre, String apellido,
-            LocalDate fechaCreacion, boolean activo, Set<UsuarioRol> roles) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
+    public void setNombre(String nombre) {
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaCreacion = fechaCreacion;
-        this.activo = activo;
-        this.roles = roles;
     }
-    
-    
 
-    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
