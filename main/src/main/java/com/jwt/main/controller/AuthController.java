@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jwt.main.dto.AuthRequest;
 import com.jwt.main.dto.AuthResponse;
 import com.jwt.main.dto.JsonResult;
+import com.jwt.main.dto.RegisterRequest;
+import com.jwt.main.dto.RegisterResponse;
 import com.jwt.main.services.AuthService;
 
 import jakarta.validation.Valid;
@@ -23,5 +25,10 @@ public class AuthController {
     @PostMapping("/login")
     public JsonResult<AuthResponse> login(@RequestBody @Valid AuthRequest authRequest) {
         return authService.login(authRequest);
+    }
+
+    @PostMapping("/register")
+    public JsonResult<RegisterResponse> login(@RequestBody @Valid RegisterRequest registerRequest) {
+        return authService.register(registerRequest);
     }
 }
