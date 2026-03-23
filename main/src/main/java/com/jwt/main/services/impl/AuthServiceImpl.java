@@ -20,6 +20,7 @@ import com.jwt.main.entity.UsuarioRol;
 import com.jwt.main.repository.RolRepository;
 import com.jwt.main.repository.UsuarioRespository;
 import com.jwt.main.repository.UsuarioRolRepository;
+import com.jwt.main.security.JwtService;
 import com.jwt.main.services.AuthService;
 
 @Service
@@ -35,6 +36,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+     @Autowired
+    private JwtService jwtService;
+
 
     AuthServiceImpl(UsuarioRolRepository usuarioRolRepository) {
         this.usuarioRolRepository = usuarioRolRepository;
@@ -60,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
             return new JsonResult<>(false, "Contraseña incorrecta", null);
         }
 
-        String token = "tokenficticio";
+        String token = jwtService.generateToken(usuario, null);
 
         AuthResponse authResponse = new AuthResponse(
                 token,
