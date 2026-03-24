@@ -31,4 +31,10 @@ public class AuthController {
     public JsonResult<RegisterResponse> login(@RequestBody @Valid RegisterRequest registerRequest) {
         return authService.register(registerRequest);
     }
+
+
+    @PostMapping("/ping")
+    public String ping(@RequestBody @Valid AuthRequest authRequest) {
+        return "esta funcionando el filtro jwt";
+    }
 }

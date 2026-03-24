@@ -65,10 +65,13 @@ public class AuthServiceImpl implements AuthService {
             return new JsonResult<>(false, "Contraseña incorrecta", null);
         }
 
-        String token = jwtService.generateToken(usuario, null);
+        List<String> roles = usuarioRolRepository.findByUsuarioId(usuario.getId())
+        .stream()
+        .map(usuarioRol -> usuarioRol.getRol().getCodigo())
+        .toList();
 
         AuthResponse authResponse = new AuthResponse(
-                token,
+                jwtService.generateToken(usuario, roles),
                 usuario.getUsername(),
                 usuario.getNombre() + " " + usuario.getApellido(),
                 null
